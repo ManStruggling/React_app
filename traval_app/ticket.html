@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <title>首页</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/flexible.min.js"></script>
+    <script type="text/javascript" src="js/tab.js"></script>
+    <!--<style id="rootFontSize">html{font-size: 100px !important;}</style>-->
+</head>
+<body>
+<header class="page-header">
+    <a href="home-page.html" class="page-return">
+        <img src="img/return.png" alt="" class="return">
+    </a>
+    <span class="page-name">优惠券</span>
+</header>
+<section class="ticket-nav">
+    <span class="trip-nav-active ticket-nav-sub" data-toggle="ticketNew">未使用</span>
+    <span class="ticket-nav-sub" data-toggle="ticketLog">使用记录（6）</span>
+    <span class="ticket-nav-sub" data-toggle="ticketUsed">已过期（15）</span>
+</section>
+<div class="mb-bg"></div>
+<section class="ticket-box" id="ticketNew">
+    <div class="ticket">
+        <div class="ticket-price">
+            ￥<span>20</span>
+        </div>
+        <div class="ticket-info">
+            优惠券信息
+        </div>
+        <div class="ticket-btn">
+            <button>立即使用</button>
+        </div>
+    </div>
+</section>
+<section class="ticket-box hidden" id="ticketLog">
+    <div class="ticket">
+        <div class="ticket-price">
+            ￥<span>20</span>
+        </div>
+        <div class="ticket-info">
+            优惠券信息
+        </div>
+        <div class="ticket-btn"></div>
+    </div>
+</section>
+<section class="ticket-box hidden" id="ticketUsed">
+    <div class="ticket">
+        <div class="ticket-price">
+            ￥<span>250</span>
+        </div>
+        <div class="ticket-info">
+            满250减250
+        </div>
+        <div class="ticket-btn"></div>
+    </div>
+    <div class="ticket">
+        <div class="ticket-price">
+            ￥<span>30</span>
+        </div>
+        <div class="ticket-info">
+            满5000减30
+        </div>
+        <div class="ticket-btn"></div>
+    </div>
+</section>
+</body>
+<script type="text/javascript">
+    var tab = new Tab("ticket-nav-sub", "ticket-box", "trip-nav-active");
+</script>
+</html>

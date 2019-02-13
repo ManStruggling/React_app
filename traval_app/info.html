@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <title>基本信息</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/LArea.css">
+    <link rel="stylesheet" href="css/mobileSelect.css">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/flexible.min.js"></script>
+    <!--<style id="rootFontSize">html{font-size: 100px !important;}</style>-->
+</head>
+<body>
+<div class="wrap">
+    <!--头部-->
+    <header class="page-header mb-10">
+        <a href="home-page.html" class="page-return">
+            <img src="img/return.png" alt="" class="return">
+        </a>
+        <span class="page-name">基本信息</span>
+    </header>
+    <!--基本信息-->
+    <section class="info-box mb-10">
+        <div class="info-row">
+            <span class="info-row-title">头像</span>
+            <span class="avator-sm">
+                <img src="img/avatar.jpg" alt="">
+            </span>
+        </div>
+        <div class="info-row">
+            <span class="info-row-title">昵称</span>
+            <span class="info-row-text">lamvins</span>
+        </div>
+        <div class="info-row">
+            <span class="info-row-title">性别</span>
+            <span class="info-row-text">男</span>
+            <div class="info-row-right info-right-sex">
+                <span class="info-sex-man sex-active">男</span>
+                <span>女</span>
+            </div>
+        </div>
+        <div class="info-row">
+            <span class="info-row-title">年龄</span>
+            <span class="info-row-text" id="age">18</span>
+            <!--<input id="value1" type="hidden" />-->
+            <!--<input class="info-row-text" id="age" type="text" readonly value="18"/>-->
+            <input id="value1" type="hidden" />
+            <div class="info-row-right">
+                <img src="img/select.png" alt="" id="agePic">
+            </div>
+        </div>
+        <div class="info-row">
+            <span class="info-row-title">所在地</span>
+            <span class="info-row-text" id="location">兰州市</span>
+            <!--<input class="info-row-text" id="location" type="text" readonly value="兰州市"/>-->
+            <input id="value2" type="hidden" />
+            <div class="info-row-right">
+                <img src="img/select.png" alt="" id="locationPic">
+            </div>
+        </div>
+    </section>
+
+    <!--手机号+身份证-->
+    <section class="info-row">
+        <span class="info-row-title">手机号</span>
+        <span class="info-row-text">13220450210</span>
+        <div class="info-row-right info-right-phone">
+            <span>修改手机号</span>
+        </div>
+    </section>
+    <section class="info-row">
+        <span class="info-row-title">身份证号</span>
+        <span class="info-row-text"></span>
+    </section>
+</div>
+</body>
+<script type="text/javascript" src="js/LArea.js"></script>
+<script type="text/javascript" src="js/LAreaData2.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var locationPic =$("#locationPic");
+        $(locationPic).on("click", function () {
+            $("#location").click();
+        });
+        var area2 = new LArea();
+        area2.init({
+            'trigger': '#location',
+            'valueTo': '#value2',
+            'keys': {
+                id: 'value',
+                name: 'text'
+            },
+            'type': 2,
+            'data': [provs_data, citys_data],
+            'way': "span"
+        });
+    });
+</script>
+<script type="text/javascript" src="js/mobileSelect.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var agePic = $("#agePic");
+        var arr = new Array();
+        $(agePic).on("click", function () {
+            $("#age").click();
+        });
+        for(var i=0; i<100; i++){
+            arr[i] = 2018 - i;
+        }
+        var mobileSelect1 = new MobileSelect({
+            trigger: '#age',
+            title: '    ',
+            wheels: [
+                {data:arr}
+            ],
+            position:[0], //初始化定位
+            callback:function(indexArr, data){
+                var select = data;
+                var age = 2018 - select;
+                $("#age").text(age);
+            }
+        });
+    });
+</script>
+</html>

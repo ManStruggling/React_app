@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <title>首页</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/flexible.min.js"></script>
+    <script type="text/javascript" src="js/tab.js"></script>
+    <!--<style id="rootFontSize">html{font-size: 100px !important;}</style>-->
+</head>
+<body>
+<header class="page-header">
+    <a href="home-page.html" class="page-return">
+        <img src="img/return.png" alt="" class="return">
+    </a>
+    <span class="page-name">我的行程</span>
+</header>
+<section class="trip-nav">
+    <span class="trip-nav-active trip-nav-sub" data-toggle="tripAll">全部</span>
+    <span class="trip-nav-sub" data-toggle="tripBegin">即将开始</span>
+    <span class="trip-nav-sub" data-toggle="tripFinish">已结束</span>
+    <span class="trip-nav-sub" data-toggle="tripComment">待评价</span>
+</section>
+<div class="mb-bg"></div>
+<section class="trip-box" id="tripAll">
+    <div class="trip-sub">
+        <div class="trip-title-box">
+            <div class="trip-title">
+                <span>订单编号</span>
+                2018010110021
+            </div>
+            <div class="trip-state">
+                待评价
+            </div>
+        </div>
+        <a href="order-comment.html">
+            <div class="trip-content-box">
+                <div class="trip-avatar">
+                    <img src="img/avatar.jpg" alt="">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-text">
+                        城市：兰州
+                    </div>
+                    <div class="trip-text">
+                        时间：2018.01.01
+                    </div>
+                    <div class="trip-text">
+                        人数：2人
+                    </div>
+                </div>
+                <div class="float-right trip-right">
+                    <img src="img/select.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="trip-btn-box">
+            <button class="btn-delete">删除订单</button>
+            <a href="comment.html"><button class="btn-comment">评价</button></a>
+        </div>
+    </div>
+    <div class="trip-sub">
+        <div class="trip-title-box">
+            <div class="trip-title">
+                <span>订单编号</span>
+                2018010110021
+            </div>
+            <div class="trip-state">
+                已结束
+            </div>
+        </div>
+        <a href="order-finish.html">
+            <div class="trip-content-box">
+                <div class="trip-avatar">
+                    <img src="img/avatar.jpg" alt="">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-text">
+                        城市：兰州
+                    </div>
+                    <div class="trip-text">
+                        时间：2018.01.01
+                    </div>
+                    <div class="trip-text">
+                        人数：2人
+                    </div>
+                </div>
+                <div class="float-right trip-right">
+                    <img src="img/select.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="trip-btn-box">
+            <button class="btn-delete">删除订单</button>
+        </div>
+    </div>
+    <div class="trip-sub">
+        <div class="trip-title-box">
+            <div class="trip-title">
+                <span>订单编号</span>
+                2018010110021
+            </div>
+            <div class="trip-state">
+                即将开始
+            </div>
+        </div>
+        <a href="order-begin.html">
+            <div class="trip-content-box">
+                <div class="trip-avatar">
+                    <img src="img/avatar.jpg" alt="">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-text">
+                        城市：兰州
+                    </div>
+                    <div class="trip-text">
+                        时间：2018.01.01
+                    </div>
+                    <div class="trip-text">
+                        人数：2人
+                    </div>
+                </div>
+                <div class="float-right trip-right">
+                    <img src="img/select.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="trip-btn-box">
+            <button class="btn-delete">删除订单</button>
+        </div>
+    </div>
+</section>
+<section class="trip-box hidden" id="tripBegin">
+    <div class="trip-sub">
+        <div class="trip-title-box">
+            <div class="trip-title">
+                <span>订单编号</span>
+                2018010110021
+            </div>
+            <div class="trip-state">
+                即将开始
+            </div>
+        </div>
+        <a href="order-begin.html">
+            <div class="trip-content-box">
+                <div class="trip-avatar">
+                    <img src="img/avatar.jpg" alt="">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-text">
+                        城市：兰州
+                    </div>
+                    <div class="trip-text">
+                        时间：2018.01.01
+                    </div>
+                    <div class="trip-text">
+                        人数：2人
+                    </div>
+                </div>
+                <div class="float-right trip-right">
+                    <img src="img/select.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="trip-btn-box">
+            <button class="btn-delete">删除订单</button>
+        </div>
+    </div>
+</section>
+<section class="trip-box hidden" id="tripFinish">
+    <div class="trip-sub">
+        <div class="trip-title-box">
+            <div class="trip-title">
+                <span>订单编号</span>
+                2018010110021
+            </div>
+            <div class="trip-state">
+                已结束
+            </div>
+        </div>
+        <a href="order-finish.html">
+            <div class="trip-content-box">
+                <div class="trip-avatar">
+                    <img src="img/avatar.jpg" alt="">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-text">
+                        城市：兰州
+                    </div>
+                    <div class="trip-text">
+                        时间：2018.01.01
+                    </div>
+                    <div class="trip-text">
+                        人数：2人
+                    </div>
+                </div>
+                <div class="float-right trip-right">
+                    <img src="img/select.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="trip-btn-box">
+            <button class="btn-delete">删除订单</button>
+        </div>
+    </div>
+</section>
+<section class="trip-box hidden" id="tripComment">
+    <div class="trip-sub">
+        <div class="trip-title-box">
+            <div class="trip-title">
+                <span>订单编号</span>
+                2018010110021
+            </div>
+            <div class="trip-state">
+                待评价
+            </div>
+        </div>
+        <a href="order-comment.html">
+            <div class="trip-content-box">
+                <div class="trip-avatar">
+                    <img src="img/avatar.jpg" alt="">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-text">
+                        城市：兰州
+                    </div>
+                    <div class="trip-text">
+                        时间：2018.01.01
+                    </div>
+                    <div class="trip-text">
+                        人数：2人
+                    </div>
+                </div>
+                <div class="float-right trip-right">
+                    <img src="img/select.png" alt="">
+                </div>
+            </div>
+        </a>
+        <div class="trip-btn-box">
+            <button class="btn-delete">删除订单</button>
+            <a href="comment.html"><button class="btn-comment">评价</button></a>
+        </div>
+    </div>
+</section>
+</body>
+<script type="text/javascript">
+    var tab = new Tab("trip-nav-sub", "trip-box", "trip-nav-active");
+</script>
+</html>
