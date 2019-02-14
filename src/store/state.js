@@ -1,6 +1,20 @@
 export default {
-  a:1,
-  list:['aaa','bbb'],
-  b:2,
-  bNav:true
+  list:[
+    {
+      id:1,
+      url:'img/avatar.jpg',
+      name:'飞奔的蜗牛',
+      time:'2019.02.14',
+      content:'银装素裹，分外妖娆。晚上更漂亮的地方。'
+    },
+    {
+      id:2,
+      url:'img/guide_bg.png',
+      name:'极速乌龟',
+      time:'2019.02.11',
+      content:'我想去西部(新疆、西藏、青海、四川、云南)自驾游，求一个妹子同行。。。'
+    }
+  ],
+  bNav:true,
+  bLoading:true
 }

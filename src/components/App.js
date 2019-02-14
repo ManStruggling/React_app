@@ -17,35 +17,61 @@ import AuthUser from "../guard/AuthUser";
 import Loading from '../common/Loading/Loading'
 import pubsub from 'pubsub-js';
 
-import {connet} from 'react-redux'
+import {connect} from 'react-redux'
 
 class App extends React.Component {
-    constructor(){
-        super();
+    // constructor(){
+    //     super();
     
-        this.state={
-          bLoading:false,
-          bNav:true
-        };
-        //订阅loading请求
-        pubsub.subscribe('view_loading',(mess,bl)=>{
-          this.setState({bLoading:bl})
-        })
+    //     this.state={
+    //       bLoading:false,
+    //       bNav:true
+    //     };
+    //     //订阅loading请求
+    //     pubsub.subscribe('view_loading',(mess,bl)=>{
+    //       this.setState({bLoading:bl})
+    //     })
     
+    // }
+    // componentWillReceiveProps(nextProps){
+    //   let path = nextProps.location.pathname;
+    //   if(/home|travel|chet|user/.test(path)){
+    //     this.setState({bNav:true})
+    //   }
+    //   if(/set|login|reg|detail/.test(path)){
+    //     this.setState({bNav:false})
+    //   }
+    // }
+    componentDidMount(){
+      let {show_loading,hid_loading} = this.props
+      show_loading()//显示loading
+
+      setTimeout(() => {
+        hid_loading();//隐藏loading
+      }, 1000);
     }
     componentWillReceiveProps(nextProps){
       let path = nextProps.location.pathname;
+      let {hid,show,show_loading,hid_loading} = this.props
       if(/home|travel|chet|user/.test(path)){
-        this.setState({bNav:true})
+        show()
       }
       if(/set|login|reg|detail/.test(path)){
-        this.setState({bNav:false})
+        hid()
+      }
+
+      if(path !== this.props.location.pathname){//跳转组件
+        show_loading()//显示loading
+
+        setTimeout(() => {
+          hid_loading();//隐藏loading
+        }, 500);
       }
     }
     render() {
         return (
                 <div>
-                    {this.state.bLoading && <Loading/>}
+                    {this.props.bLoading && <Loading/>}
                     <Switch>
                         <Route path='/home' component={Home}></Route>
                         <Route path='/travel' component={Travel}></Route>
@@ -61,12 +87,35 @@ class App extends React.Component {
                         <Redirect exact from="/" to="/home"></Redirect>
                         <Route component={Error} />
                     </Switch>
-                    {this.state.bNav&&<FootNav></FootNav>}
+                    {this.props.bNav&&<FootNav></FootNav>}
                 </div>
         )
     }
 }
 
-export default App
+const mapStateToProps=state=>({
+  ...state,
+  list:state.list
+});
 
-//模板移植--路由搭建--数据交互--授权路由/自定义路由/前置守卫--全局loading(pubsub订阅发布)--非状态管理--状态管理
+const mapDispatchToProps=dispatch=>(
+  {
+    show:()=>{
+      dispatch({type:'CHANGE_BNAV',payload:true})
+    },
+    hid:()=>{
+      dispatch({type:'CHANGE_BNAV',payload:false})
+    },
+    hid_loading:()=>{
+      dispatch({type:'CHANGE_LOADING',payload:false})
+    },
+    show_loading:()=>{
+      dispatch({type:'CHANGE_LOADING',payload:true})
+    }
+  }
+);
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
+
+//模板移植--路由搭建--数据交互--授权路由/自定义路由/前置守卫--全局loading(pubsub订阅发布)--非状态管理--状态管理(loading、bNav、detail的评论数据)

@@ -1,7 +1,16 @@
 import React from 'react';
 
+import {connect} from 'react-redux'
+
 class DetailList extends React.Component{
+    constructor(){
+        super()
+        this.state={
+            str:''
+        }
+    }
     render(){
+        let {list,add} = this.props;
         return (
             <div className="wrap">
                 <section className="mb-10">
@@ -40,82 +49,44 @@ class DetailList extends React.Component{
                             评论（2200）
                         </div>
                         <div className="container">
-                            <input type="text" className="comment-input" placeholder="写评论" />
+                            <input type="text" value={this.state.str} className="comment-input" placeholder="写评论" onChange={
+                                (ev)=>{
+                                    this.setState({
+                                        str:ev.target.value
+                                    })
+                                }
+                            }/>
+                            <input type="button" value="发表" onClick={(ev)=>{
+                                add.call(null,ev,this.state.str)
+                                this.setState({
+                                    str:''
+                                })
+                            }} style={{background:'#ccc',margin:'5px',padding:'5px 10px',borderRadius:'3px'}}/>
                         </div>
                     </div>
                     <div className="comment-list">
-                        <div className="comment-sub ">
-                            <div className="comment-sub-title">
-                                <div className="comment-pic">
-                                    <img src="../assets/img/avatar.jpg" alt="" />
-                                </div>
-                                <div className="comment-info">
-                                    <div className="comment-name">
-                                        飞奔的蜗牛
+                        {
+                            list.map((item,index)=>(
+                                <div className="comment-sub " key={index}>
+                                    <div className="comment-sub-title">
+                                        <div className="comment-pic">
+                                            <img src={"../assets/"+item.url} alt="" />
+                                        </div>
+                                        <div className="comment-info">
+                                            <div className="comment-name">
+                                                {item.name}
+                                            </div>
+                                            <div className="comment-time" style={{fontSize:'.3rem'}}>
+                                                {item.time}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="comment-time">
-                                        2018.01.01
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="comment-content">
-                                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
-                            </div>
-                        </div>
-                        <div className="comment-sub ">
-                            <div className="comment-sub-title">
-                                <div className="comment-pic">
-                                    <img src="../assets/img/avatar.jpg" alt="" />
-                                </div>
-                                <div className="comment-info">
-                                    <div className="comment-name">
-                                        飞奔的蜗牛
-                                    </div>
-                                    <div className="comment-time">
-                                        2018.01.01
+                                    <div className="comment-content">
+                                       {item.content}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="comment-content">
-                                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
-                            </div>
-                        </div>
-                        <div className="comment-sub ">
-                            <div className="comment-sub-title">
-                                <div className="comment-pic">
-                                    <img src="../assets/img/avatar.jpg" alt="" />
-                                </div>
-                                <div className="comment-info">
-                                    <div className="comment-name">
-                                        飞奔的蜗牛
-                                    </div>
-                                    <div className="comment-time">
-                                        2018.01.01
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="comment-content">
-                                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
-                            </div>
-                        </div>
-                        <div className="comment-sub ">
-                            <div className="comment-sub-title">
-                                <div className="comment-pic">
-                                    <img src="../assets/img/avatar.jpg" alt="" />
-                                </div>
-                                <div className="comment-info">
-                                    <div className="comment-name">
-                                        飞奔的蜗牛
-                                    </div>
-                                    <div className="comment-time">
-                                        2018.01.01
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="comment-content">
-                                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
                     <div className="comment-more">
                         加载全部评论
@@ -143,4 +114,26 @@ class DetailList extends React.Component{
     }
 }
 
-export default DetailList;
+const mapStateToProps=state=>({
+    ...state,
+    list:state.list
+  });
+  
+  const mapDispatchToProps=dispatch=>(
+    {
+      add:(ev,arg)=>{
+        dispatch({
+            type:'ADD_ITEM',
+            payload:{
+                url:'img/avatar.jpg',
+                name:'飞奔的蜗牛',
+                time:'2018.01.01',
+                content:arg
+              }
+        })
+      }
+    }
+  );
+  
+  
+  export default connect(mapStateToProps,mapDispatchToProps)(DetailList);

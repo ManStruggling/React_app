@@ -406,8 +406,8 @@ section{
 }
 /*评论区*/
 .comment-list{
-    max-height: 6.45rem;
-    overflow: hidden;
+    min-height: 10.75rem;
+    /* overflow: hidden; */
 }
 .comment-sub{
     padding: 0.26rem 0.34rem 0.24rem 0.28rem;

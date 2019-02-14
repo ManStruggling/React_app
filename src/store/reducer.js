@@ -3,7 +3,7 @@
 
 const reducer = (state,action) => {
 
-  console.log('reducer',state,action);
+  // console.log('reducer',state,action);
 
   let {type,payload}=action;
 
@@ -19,6 +19,16 @@ const reducer = (state,action) => {
         ...state,
         list:state.list.concat(payload),
       };
+    case 'CHANGE_BNAV':
+      return {
+        ...state,
+        bNav:payload
+      }
+    case 'CHANGE_LOADING':
+      return {
+        ...state,
+        bLoading:payload
+      }
     default:
       return state
   }
