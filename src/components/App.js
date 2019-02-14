@@ -17,6 +17,8 @@ import AuthUser from "../guard/AuthUser";
 import Loading from '../common/Loading/Loading'
 import pubsub from 'pubsub-js';
 
+import {connet} from 'react-redux'
+
 class App extends React.Component {
     constructor(){
         super();

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import ToDoList from './ToDoList/ToDoList'
+
 class Travel extends React.Component{
     render(){
         return (
@@ -35,6 +37,7 @@ class Travel extends React.Component{
                         <a href="guide-select.html"><button>下一步</button></a>
                     </div>
                 </section>
+                {/* <ToDoList/> */}
             </div>
         )
     }
