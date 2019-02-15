@@ -11,13 +11,13 @@ class Home extends React.Component{
         list:[]
     }
     componentDidMount(){
-        pubsub.publish('view_loading',true);
+        // pubsub.publish('view_loading',true);
         fetch('/data/list.json').then(
             res=>res.json()
         ).then(
             data=>{
                 setTimeout(() => {
-                        pubsub.publish('view_loading',false);
+                        // pubsub.publish('view_loading',false);
                         this.setState({list:data})
                     }, 1000)
                 }

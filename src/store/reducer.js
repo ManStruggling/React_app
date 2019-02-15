@@ -29,6 +29,16 @@ const reducer = (state,action) => {
         ...state,
         bLoading:payload
       }
+    case 'CHECK_USER':
+      return {
+        ...state,
+        auth:payload
+      }
+    case 'LOGOUT':
+      return {
+        ...state,
+        auth:payload
+      }
     default:
       return state
   }

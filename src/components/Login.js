@@ -1,18 +1,41 @@
 import React from 'react';
+import {connect} from 'react-redux'
 
 import {Link} from 'react-router-dom';
 
 class Login extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            userName:'',
+            passWord:''
+        }
+        this.bind_data=this.bind_data.bind(this);
+    }
+    bind_data(ev){
+        this.setState({
+            [ev.target.name]:ev.target.value
+        })
+    }
     render(){
+        let {check_user} = this.props
         return (
             <div>
-                <header className="logon-header"></header>
+                <Link to='home'>
+                    <header className="logon-header"></header>
+                </Link>
                 <section className="logon-box">
-                    <input type="text" placeholder="手机号" />
-                    <input type="password" placeholder="密码" />
+                    <input type="text" value={this.state.userName} name='userName' placeholder="手机号" onChange={this.bind_data} />
+                    <input type="password" value={this.state.passWord} name='passWord' placeholder="密码" onChange={this.bind_data} />
                     <a href="" className="forget">忘记密码？</a>
                     <div className="btn-box">
-                        <Link to='/user'><button>登录</button></Link>
+                        <button  onClick={(ev)=>{
+                            check_user.call(null,ev,{
+                                userName:this.state.userName,
+                                passWord:this.state.passWord
+                            })
+                            this.props.history.push({pathname:'/home'})
+                        }}>登录</button>
                     </div>
                     <div className="register-box">
                         没有账号？
@@ -40,4 +63,26 @@ class Login extends React.Component{
     }
 }
 
-export default Login;
+const mapStateToProps=state=>({
+    ...state,
+  });
+  
+const mapDispatchToProps=dispatch=>(
+    {
+      check_user:(ev,arg)=>{
+        fetch('/data/user.json').then(
+            res=>res.json()
+        ).then(
+            data=>{
+                if(arg.userName==data.userName && arg.passWord==data.passWord){
+                  dispatch({type:'CHECK_USER',payload:true});
+                }else{
+                  dispatch({type:'CHECK_USER',payload:false})
+                }
+            }
+        )
+      }
+    }
+);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

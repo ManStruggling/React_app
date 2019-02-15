@@ -69,6 +69,7 @@ class App extends React.Component {
       }
     }
     render() {
+        let {auth,check_user} = this.props
         return (
                 <div>
                     {this.props.bLoading && <Loading/>}
@@ -77,7 +78,7 @@ class App extends React.Component {
                         <Route path='/travel' component={Travel}></Route>
                         <Route path='/chet' component={Chet}></Route>
 
-                        <AuthUser path="/user" component={User} />
+                        {auth?<Route path="/user" component={User} />:<Redirect exact from="/user" to="/login"/>}
                         
                         <Route path='/set' component={Set}></Route>
                         <Route path='/login' component={Login}></Route>
@@ -95,7 +96,8 @@ class App extends React.Component {
 
 const mapStateToProps=state=>({
   ...state,
-  list:state.list
+  list:state.list,
+  check_user:state.check_user
 });
 
 const mapDispatchToProps=dispatch=>(
@@ -111,6 +113,19 @@ const mapDispatchToProps=dispatch=>(
     },
     show_loading:()=>{
       dispatch({type:'CHANGE_LOADING',payload:true})
+    },
+    check_user:(ev,arg)=>{
+      fetch('/data/user.json').then(
+          res=>res.json()
+      ).then(
+          data=>{
+              if(arg.userName==data.userName && arg.passWord==data.passWord){
+                dispatch({type:'CHECK_USER',payload:true});
+              }else{
+                dispatch({type:'CHECK_USER',payload:false})
+              }
+          }
+      )
     }
   }
 );

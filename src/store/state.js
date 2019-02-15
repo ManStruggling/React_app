@@ -16,5 +16,6 @@ export default {
     }
   ],
   bNav:true,
-  bLoading:true
+  bLoading:true,
+  auth:false
 }

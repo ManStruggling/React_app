@@ -1,5 +1,7 @@
 {
     "hasAuth":false,
       "auth":true,
-      "data":null
+      "data":null,
+      "userName":"alice",
+      "passWord":"alice123"
 }

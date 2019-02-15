@@ -1,9 +1,12 @@
 import React from 'react';
 
+import {connect} from 'react-redux'
+
 import {Link} from 'react-router-dom';
 
 class Set extends React.Component{
     render(){
+        let {logout} = this.props
         return (
             <div>
                 <header className="page-header">
@@ -33,7 +36,9 @@ class Set extends React.Component{
                     </div>
                     <div className="logout">
                         <Link to='login'>
-                            <button>退出登录</button>
+                            <button onClick={
+                                logout.bind(this)
+                            }>退出登录</button>
                         </Link>
                     </div>
                 </section>
@@ -42,4 +47,17 @@ class Set extends React.Component{
     }
 }
 
-export default Set;
+const mapStateToProps=state=>({
+    ...state,
+  });
+  
+const mapDispatchToProps=dispatch=>(
+    {
+      logout:()=>{
+        dispatch({type:'LOGOUT',payload:false})
+      },
+      
+    }
+);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Set);
