@@ -1,23 +1,35 @@
 import React from 'react';
 
 import {Route,Switch,Redirect} from 'react-router-dom';
-
-import Home from './Home';
-import FootNav from './FootNav';
-import Travel from './Travel';
-import Chet from './Chet';
-import User from './User';
+// import User from './User';
 import Set from './Set';
 import Error from './Error';
 import Login from './Login'
 import Reg from './Reg';
 import Detail from './Detail';
-
-import AuthUser from "../guard/AuthUser";
-import Loading from '../common/Loading/Loading'
-import pubsub from 'pubsub-js';
-
 import {connect} from 'react-redux'
+import Home from './Home';
+import FootNav from './FootNav';
+import Travel from './Travel';
+// import Chet from './Chet';
+import Loadable from 'react-loadable';
+
+import Loading from '../common/Loading/Loading'
+const Chet = Loadable({
+  loader: () => import('./Chet'),
+//  loading: Loading,
+ loading:()=>{return null}
+});
+
+const User = Loadable({
+  loader: () => import('./User'),
+//  loading: Loading,
+ loading:()=>{return null}
+});
+
+// import AuthUser from "../guard/AuthUser";
+// import pubsub from 'pubsub-js';
+
 
 class App extends React.Component {
     // constructor(){
@@ -65,11 +77,11 @@ class App extends React.Component {
 
         setTimeout(() => {
           hid_loading();//隐藏loading
-        }, 500);
+        }, 300);
       }
     }
     render() {
-        let {auth,check_user} = this.props
+        let {auth} = this.props;
         return (
                 <div>
                     {this.props.bLoading && <Loading/>}
@@ -78,8 +90,7 @@ class App extends React.Component {
                         <Route path='/travel' component={Travel}></Route>
                         <Route path='/chet' component={Chet}></Route>
 
-                        {auth?<Route path="/user" component={User} />:<Redirect exact from="/user" to="/login"/>}
-                        
+                        {auth?<Route path="/user" component={User}/>:<Redirect exact from="/user" to="/login"/>}
                         <Route path='/set' component={Set}></Route>
                         <Route path='/login' component={Login}></Route>
                         <Route path='/reg' component={Reg}></Route>
@@ -96,8 +107,7 @@ class App extends React.Component {
 
 const mapStateToProps=state=>({
   ...state,
-  list:state.list,
-  check_user:state.check_user
+  list:state.list
 });
 
 const mapDispatchToProps=dispatch=>(
@@ -113,19 +123,6 @@ const mapDispatchToProps=dispatch=>(
     },
     show_loading:()=>{
       dispatch({type:'CHANGE_LOADING',payload:true})
-    },
-    check_user:(ev,arg)=>{
-      fetch('/data/user.json').then(
-          res=>res.json()
-      ).then(
-          data=>{
-              if(arg.userName==data.userName && arg.passWord==data.passWord){
-                dispatch({type:'CHECK_USER',payload:true});
-              }else{
-                dispatch({type:'CHECK_USER',payload:false})
-              }
-          }
-      )
     }
   }
 );
@@ -133,4 +130,4 @@ const mapDispatchToProps=dispatch=>(
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);
 
-//模板移植--路由搭建--数据交互--授权路由/自定义路由/前置守卫--全局loading(pubsub订阅发布)--非状态管理--状态管理(loading、bNav、detail的评论数据)
+//模板移植--路由搭建--数据交互--授权路由/自定义路由/前置守卫--全局loading(pubsub订阅发布)--非状态管理--状态管理(loading、bNav、detail的评论数据、路由守卫)--异步组件（懒加载）--异步action--滚动条监听

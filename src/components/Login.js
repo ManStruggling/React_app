@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import {Link} from 'react-router-dom';
 
+import async from '../store/actions'
 class Login extends React.Component{
     constructor(){
         super();
@@ -32,9 +33,9 @@ class Login extends React.Component{
                         <button  onClick={(ev)=>{
                             check_user.call(null,ev,{
                                 userName:this.state.userName,
-                                passWord:this.state.passWord
+                                passWord:this.state.passWord,
+                                history:this.props.history
                             })
-                            this.props.history.push({pathname:'/home'})
                         }}>登录</button>
                     </div>
                     <div className="register-box">
@@ -70,18 +71,22 @@ const mapStateToProps=state=>({
 const mapDispatchToProps=dispatch=>(
     {
       check_user:(ev,arg)=>{
-        fetch('/data/user.json').then(
-            res=>res.json()
-        ).then(
-            data=>{
-                if(arg.userName==data.userName && arg.passWord==data.passWord){
-                  dispatch({type:'CHECK_USER',payload:true});
-                }else{
-                  dispatch({type:'CHECK_USER',payload:false})
-                }
-            }
-        )
+        // fetch('/data/user.json').then(
+        //     res=>res.json()
+        // ).then(
+        //     data=>{
+        //         if(arg.userName==data.userName && arg.passWord==data.passWord){
+        //           dispatch({type:'CHECK_USER',payload:true});
+        //         }else{
+        //           dispatch({type:'CHECK_USER',payload:false})
+        //         }
+        //     }
+        // )
+        return dispatch(async(dispatch,arg))
       }
+    //   add:()=>dispatch(async2()).then(
+    //     (id)=>console.log('回执后的业务',id)
+    //   )
     }
 );
 
