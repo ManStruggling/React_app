@@ -12,13 +12,13 @@ class Home extends React.Component{
     }
     componentDidMount(){
         // pubsub.publish('view_loading',true);
-        fetch('/data/list.json').then(
+        fetch('http://47.102.127.181:4000/api/list').then(
             res=>res.json()
         ).then(
             data=>{
                 setTimeout(() => {
                         // pubsub.publish('view_loading',false);
-                        this.setState({list:data})
+                        this.setState({list:data.data})
                     }, 1000)
                 }
 

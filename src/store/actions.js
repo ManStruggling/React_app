@@ -14,13 +14,13 @@ const async=(dispatch,arg)=>{
     //     },1000);
     //   }
     // );
-    fetch('/data/user.json').then(
+    fetch('http://47.102.127.181:4000/api/log').then(
             res=>res.json()
         ).then(
             data=>{
                 setTimeout(() => {
                     dispatch({type:'CHANGE_LOADING',payload:false})
-                if(arg.userName==data.userName && arg.passWord==data.passWord){
+                if(arg.userName==data.data[0].userName && arg.passWord==data.data[0].passWord){
                     console.log('send')
                   dispatch({type:'CHECK_USER',payload:true});
                 }else{
